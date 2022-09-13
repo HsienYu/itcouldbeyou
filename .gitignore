@@ -37,3 +37,13 @@ temporary/
 # Pypi wheel
 build/
 exclude/
+
+# node js
+node_modules/
+
+.DS_Store
+
+# assets
+view/fake_females
+view/fake_males
+
