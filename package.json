@@ -2,9 +2,10 @@
   "name": "itcouldbeyou",
   "version": "1.0.0",
   "description": "",
-  "main": "app.js",
+  "main": "main.js",
   "scripts": {
     "start": "electron .",
+    "electron": "ELECTRON_DISABLE_SECURITY_WARNINGS=true electron .",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -21,6 +22,9 @@
     "electron": "^20.1.3"
   },
   "dependencies": {
-    "osc-js": "^2.3.2"
+    "axios": "^0.27.2",
+    "fs": "^0.0.1-security",
+    "node-osc": "^8.0.5",
+    "python-shell": "^3.0.1"
   }
 }

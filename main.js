@@ -1,18 +1,16 @@
-const { app, BrowserWindow } = require('electron')
+const { app, BrowserWindow, screen } = require('electron')
 const path = require('path')
+// const url = require('url')
+
 
 let win;
-let display_width;
-let display_height;
 
 function createWindow() {
     const win = new BrowserWindow({
-        webSecurity: false,
-        allowRunningInsecureContent: true,
-        x: 0,
+        x: -3840,
         y: 0,
-        width: 720,
-        height: 640,
+        width: 800,
+        height: 600,
         focusable: false,
         transparent: true,
         frame: false,
@@ -23,29 +21,31 @@ function createWindow() {
         webPreferences: {
             preload: path.join(__dirname, './js/preload.js'),
             nodeIntegration: true,
+            contextIsolation: false,
             nodeIntegrationInWorker: true,
+            webSecurity: false,
+            allowRunningInsecureContent: true
         }
     })
 
-    win.setSize(1024, 768);
-
-    //add mouse press through
-    win.setIgnoreMouseEvents(false);
+    win.setSize(1920, 1080);
+    // //add mouse press through
+    win.setIgnoreMouseEvents(true);
 
     // Open the DevTools.
-    win.webContents.openDevTools();
+    //win.webContents.openDevTools();
+
 
     win.loadFile('index.html')
 }
 
-app.allowRendererProcessReuse = false
+app.commandLine.appendSwitch('ignore-certificate-errors');
 
 //enable hardware acceleration
 app.disableHardwareAcceleration(true);
 
 app.whenReady().then(() => {
     createWindow()
-
     app.on('activate', () => {
         if (BrowserWindow.getAllWindows().length === 0) {
             createWindow()
@@ -58,3 +58,6 @@ app.on('window-all-closed', () => {
         app.quit()
     }
 })
+
+// In this file you can include the rest of your app's specific main process
+// code. You can also put them in separate files and require them here.
